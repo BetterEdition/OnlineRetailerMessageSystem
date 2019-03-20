@@ -70,12 +70,14 @@ namespace OrderApi.Controllers
                 }
                 catch
                 {
+                    order.Status = Order.OrderStatus.cancelled;
                     return StatusCode(500, "An error happened. Try again.");
                 }
             }
             else
             {
                 // If the order could not be created, "return no content".
+                order.Status = Order.OrderStatus.cancelled;
                 return StatusCode(500, "Not enough items in stock.");
             }
         }
