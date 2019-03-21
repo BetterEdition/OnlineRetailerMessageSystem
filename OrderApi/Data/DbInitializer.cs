@@ -32,12 +32,9 @@ namespace OrderApi.Data
 
             List<Order> orders = new List<Order>
             {
-<<<<<<< HEAD
                 new Order { Date = DateTime.Today, Id=1, Products = products}
 
-=======
                 new Order { Date = DateTime.Today, ProductsOrdered = new List<ProductOrder> { { new ProductOrder { Id = 1, Quantity = 3 } } } }
->>>>>>> ba8273192dd59aaa1d8ee793b32795b2872af172
             };
 
             context.Orders.AddRange(orders);
