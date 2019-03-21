@@ -4,5 +4,9 @@
     {
         public int ProductId { get; set; }
         public int Quantity { get; set; }
+        cancelled,
+            completed,
+            shipped,
+            paid
     }
 }

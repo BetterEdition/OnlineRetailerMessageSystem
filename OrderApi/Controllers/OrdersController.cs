@@ -52,16 +52,16 @@ namespace OrderApi.Controllers
             }
 
             // Call product service to get the product ordered
-            var orderedProduct = productServiceGateway.Get(order.ProductId);
+            var orderedProduct = productServiceGateway.Get(order.Products[1].ProductId);
 
-            if (order.Quantity <= orderedProduct.ItemsInStock - orderedProduct.ItemsReserved)
+            if (order.Products[1].Quantity <= orderedProduct.ItemsInStock - orderedProduct.ItemsReserved)
             {
                 try
                 {
                     // Publish OrderStatusChangedMessage. If this operation
                     // fails, the order will not be created
-                    messagePublisher.PublishOrderStatusChangedMessage(order.ProductId, 
-                        order.Quantity, "orderCompleted");
+                    messagePublisher.PublishOrderStatusChangedMessage(order.Products[1].ProductId,
+                        order.Products[1].Quantity, "orderCompleted");
 
                     // Create order.
                     order.Status = Order.OrderStatus.completed;

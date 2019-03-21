@@ -6,8 +6,7 @@ namespace SharedModels
     {
         public int Id { get; set; }
         public DateTime? Date { get; set; }
-        public List<ProductOrder> ProductsOrdered { get; set; }
-        public int Quantity { get; set; }
+        public List<ProductOrder> Product { get; set; }
         public OrderStatus Status { get; set; }
 
         public enum OrderStatus
