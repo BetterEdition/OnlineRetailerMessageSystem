@@ -1,11 +1,10 @@
 ﻿using System;
 using SharedModels;
 
-namespace OrderApi.Infrastructure
+namespace CustomersApi.Infrastructure
 {
     public interface IServiceGateway<T>
     {
         T Get(int id);
-       
     }
 }

@@ -10,4 +10,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedModels\SharedModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Infrastructure\IMessagePublisher.cs" />
+    <Compile Remove="Infrastructure\IServiceGateway.cs" />
+  </ItemGroup>
 </Project>

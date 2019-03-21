@@ -2,7 +2,7 @@
 using RestSharp;
 using SharedModels;
 
-namespace OrderApi.Infrastructure
+namespace CustomersApi.Infrastructure
 {
     public class ProductServiceGateway : IServiceGateway<Product>
     {
@@ -23,7 +23,5 @@ namespace OrderApi.Infrastructure
             var orderedProduct = response.Data;
             return orderedProduct;
         }
-
-
     }
 }

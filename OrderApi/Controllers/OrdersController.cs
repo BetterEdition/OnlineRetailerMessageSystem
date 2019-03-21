@@ -52,16 +52,16 @@ namespace OrderApi.Controllers
             }
 
             // Call product service to get the product ordered
-            var orderedProduct = productServiceGateway.Get(order.ProductId);
+            var orderedProduct = productServiceGateway.Get(order.Products[1].Id);
 
-            if (order.Quantity <= orderedProduct.ItemsInStock - orderedProduct.ItemsReserved)
+            if (order.Products[1].OrderedProduct <= orderedProduct.ItemsInStock - orderedProduct.ItemsReserved)
             {
                 try
                 {
                     // Publish OrderStatusChangedMessage. If this operation
                     // fails, the order will not be created
-                    messagePublisher.PublishOrderStatusChangedMessage(order.ProductId, 
-                        order.Quantity, "orderCompleted");
+                    messagePublisher.PublishOrderStatusChangedMessage(order.Products[1].Id,
+                        order.Products[1].OrderedProduct, "orderCompleted");
 
                     // Create order.
                     order.Status = Order.OrderStatus.completed;
@@ -70,15 +70,23 @@ namespace OrderApi.Controllers
                 }
                 catch
                 {
+                    order.Status = Order.OrderStatus.cancelled;
                     return StatusCode(500, "An error happened. Try again.");
                 }
             }
             else
             {
                 // If the order could not be created, "return no content".
+                order.Status = Order.OrderStatus.cancelled;
                 return StatusCode(500, "Not enough items in stock.");
             }
         }
-
     }
 }
+                
+
+            
+
+
+        
+    
