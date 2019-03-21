@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace SharedModels
 {
     public class Order
@@ -8,7 +9,8 @@ namespace SharedModels
         public DateTime? Date { get; set; }
         public List<ProductOrder> Product { get; set; }
         public OrderStatus Status { get; set; }
-
+     
+      
         public enum OrderStatus
         {
             cancelled,

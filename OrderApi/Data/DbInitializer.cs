@@ -18,15 +18,16 @@ namespace OrderApi.Data
             {
                 return;   // DB has been seeded
             }
+
             List<ProductOrder> productOrders = new List<ProductOrder>
             {
                 new ProductOrder { ProductId = 1, Quantity = 1 },
                 new ProductOrder { ProductId = 2, Quantity = 1 }
             };
-           
+
             List<Order> orders = new List<Order>
             {
-                new Order { Date = DateTime.Today, Products = productOrders  }
+                new Order { Date = DateTime.Today, Product = productOrders}
             };
          
 

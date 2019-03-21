@@ -20,9 +20,9 @@ namespace ProductApi.Data
 
             List<Product> products = new List<Product>
             {
-                new Product { Name = "Hammer", Price = 100, ItemsInStock = 10, ItemsReserved = 0 },
-                new Product { Name = "Screwdriver", Price = 70, ItemsInStock = 20, ItemsReserved = 0 },
-                new Product { Name = "Drill", Price = 500, ItemsInStock = 2, ItemsReserved = 0 }
+                new Product {Id= 1, Name = "Hammer", Price = 100, ItemsInStock = 10, ItemsReserved = 0 },
+                new Product {Id= 2, Name = "Screwdriver", Price = 70, ItemsInStock = 20, ItemsReserved = 0 },
+                new Product {Id= 3, Name = "Drill", Price = 500, ItemsInStock = 2, ItemsReserved = 0 }
             };
 
             context.Products.AddRange(products);
