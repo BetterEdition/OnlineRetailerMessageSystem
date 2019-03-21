@@ -1,6 +1,8 @@
 version: '3.4'
 
 services:
+
+
   productapi:
     image: ${DOCKER_REGISTRY-}productapi
     build:
@@ -12,4 +14,11 @@ services:
     build:
       context: .
       dockerfile: OrderApi/Dockerfile
+
+  
+  customersapi:
+    image: ${DOCKER_REGISTRY-}customersapi
+    build:
+      context: .
+      dockerfile: CustomersApi/Dockerfile
 

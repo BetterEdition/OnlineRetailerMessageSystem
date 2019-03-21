@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EasyNetQ;
 using SharedModels;
 
@@ -18,10 +19,10 @@ namespace OrderApi.Infrastructure
             bus.Dispose();
         }
 
-        public void PublishOrderStatusChangedMessage(int productId, int quantity, string topic)
+        public void PublishOrderStatusChangedMessage(List<ProductOrder> products, string topic)
         {
             var message = new OrderStatusChangedMessage
-            { ProductId = productId, Quantity = quantity };
+            { orderLine = products };
 
             bus.Publish(message, topic);
         }

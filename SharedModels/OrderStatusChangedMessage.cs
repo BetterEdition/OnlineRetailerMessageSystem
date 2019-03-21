@@ -1,12 +1,9 @@
-﻿namespace SharedModels
+﻿using System.Collections.Generic;
+
+namespace SharedModels
 {
     public class OrderStatusChangedMessage
     {
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
-        cancelled,
-            completed,
-            shipped,
-            paid
+        public List<ProductOrder> orderLine;
     }
 }
