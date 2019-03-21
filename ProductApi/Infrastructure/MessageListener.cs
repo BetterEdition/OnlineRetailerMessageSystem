@@ -30,6 +30,8 @@ namespace ProductApi.Infrastructure
                 bus.Subscribe<OrderStatusChangedMessage>("productApi", 
                     ReserveItems, x => x.WithTopic("orderCompleted"));
 
+                bus.Subscribe<OrderStatusChangedMessage>("productApi",
+                    RemoveReservedItems, x => x.WithTopic("orderCancelled"));
                 // Block the thread so that it will not exit and stop subscribing.
                 lock (this)
                 {
@@ -37,6 +39,24 @@ namespace ProductApi.Infrastructure
                 }
             }
 
+         
+
+        }
+
+        private void RemoveReservedItems(OrderStatusChangedMessage message)
+        {
+            using (var scope = provider.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var productRepos = services.GetService<IRepository<Product>>();
+
+                foreach (var item in message.orderLine)
+                {
+                    var product = productRepos.Get(item.ProductId);
+                    product.ItemsReserved -= item.Quantity;
+                    productRepos.Edit(product);
+                }
+            }
         }
 
         private void ReserveItems(OrderStatusChangedMessage message)
@@ -60,6 +80,7 @@ namespace ProductApi.Infrastructure
               
             }
         }
+
 
     }
 }

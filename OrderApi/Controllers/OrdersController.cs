@@ -51,16 +51,9 @@ namespace OrderApi.Controllers
             {
                 return BadRequest();
             }
-
             // Call product service to get the product ordered
-
-
-
-
             if (checkStock(order))
-
             {
-
                 try
                 {
                     // Publish OrderStatusChangedMessage. If this operation
@@ -102,9 +95,38 @@ namespace OrderApi.Controllers
             }
             return true;
 
-
         }
         
+        [HttpPut("cancel/{id}")]
+        public IActionResult cancel(int id){
+
+            try
+            {
+                var orderedProduct = repository.Get(id);
+                if(orderedProduct.Status == 0)
+                {
+                    return StatusCode(500, "The order is already cancelled");
+                }
+                messagePublisher.PublishOrderStatusChangedMessage(orderedProduct.Product, "orderCancelled");
+
+                orderedProduct.Status = Order.OrderStatus.cancelled;
+                
+                repository.Edit(orderedProduct);
+
+
+
+                return new ObjectResult(orderedProduct);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500, "No order matching that id");
+            }
+
+          
+            
+           
+        }
     }
 }
                 
